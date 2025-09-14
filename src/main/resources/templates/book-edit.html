@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирование книги</title>
+</head>
+<body>
+<h1 th:text="${book.id == 0 ? 'Добавить книгу' : 'Редактировать книгу'}"></h1>
+<form action="/books/save" method="post">
+    <input type="hidden" name="id" th:value="${book.id}">
+
+    <label for="title">Название:</label>
+    <input type="text" id="title" name="title" th:value="${book.title}" required><br>
+
+    <label for="author">Автор:</label>
+    <input type="text" id="author" name="author" th:value="${book.author}" required><br>
+
+    <label for="year">Год издания:</label>
+    <input type="number" id="year" name="year" th:value="${book.publishYear}" required><br>
+
+    <label for="content">Оглавление:</label>
+    <textarea id="content" name="content" rows="10" cols="50" th:text="${book.content}"></textarea><br>
+
+    <button type="submit">Сохранить</button>
+</form>
+
+<br>
+<a href="/books">Назад к списку</a>
+</body>
+</html>

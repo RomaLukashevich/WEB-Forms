@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Список книг</title>
+</head>
+<body>
+<h1>Список книг</h1>
+<a href="/books/edit/0">Добавить новую книгу</a>
+<table>
+    <thead>
+    <tr>
+        <th>Название</th>
+        <th>Автор</th>
+        <th>Год издания</th>
+        <th>Оглавление</th>
+        <th>Действия</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="book : ${books}">
+        <td th:text="${book.title}"></td>
+        <td th:text="${book.author}"></td>
+        <td th:text="${book.publishYear}"></td>
+        <td>
+            <!-- Если оглавление - это XML, то нужно его преобразовать в читаемый формат -->
+            <span th:text="${#strings.abbreviate(book.content, 100)}"></span> <!-- Просто сокращаем вывод -->
+        </td>
+        <td>
+            <a th:href="@{/books/edit/{id}(id=${book.id})}">Редактировать</a> |
+            <a th:href="@{/books/delete/{id}(id=${book.id})}">Удалить</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
